@@ -24,13 +24,11 @@ const cloudinaryRoutes = require("./routes/cloudinary.routes");
 
 // middleware
 app.use(cors({
-  origin: [
-    'https://onewoodcraft3.vercel.app',
-    'https://onewoodcraft-admin.vercel.app',
-    'https://admin-570eza62x-onewoodcrafts-projects.vercel.app',
-    'https://admin-one-nu.vercel.app'
-  ],
-  credentials: true
+  origin: 'https://admin-one-nu.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'],
+  exposedHeaders: ['*', 'Authorization']
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
