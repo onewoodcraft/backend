@@ -24,11 +24,24 @@ const cloudinaryRoutes = require("./routes/cloudinary.routes");
 
 // middleware
 app.use(cors({
-  origin: 'https://admin-one-nu.vercel.app',
+  origin: [
+    'https://admin-one-nu.vercel.app',
+    'http://localhost:3000',  // for local development
+    'http://localhost:3001'   // for local development
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'],
-  exposedHeaders: ['*', 'Authorization']
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization', 
+    'x-csrf-token', 
+    'Origin', 
+    'Accept', 
+    'X-Requested-With'
+  ],
+  exposedHeaders: ['Content-Range', 'X-Content-Range', 'Authorization'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
