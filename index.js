@@ -26,7 +26,7 @@ const cloudinaryRoutes = require("./routes/cloudinary.routes");
 app.use(cors({
   origin: [
     'https://admin-one-nu.vercel.app',
-    'https://onewoodcraft.vercel.app',
+    'https://onewoodcraft3.vercel.app',
     'http://localhost:3000',  // for local development
     'http://localhost:3001'   // for local development
   ],
