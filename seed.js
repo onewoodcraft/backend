@@ -26,7 +26,11 @@ const reviewsData = require('./utils/reviews');
 const Admin = require('./model/Admin');
 const adminData = require('./utils/admin');
 
+const mongoose = require('mongoose');
+const categories = require('./seed/categories');
+
 connectDB();
+
 const importData = async () => {
   try {
     await Brand.deleteMany();
@@ -61,4 +65,33 @@ const importData = async () => {
   }
 };
 
+const seedCategories = async () => {
+  try {
+    // Clear existing categories
+    await Category.deleteMany({});
+    console.log('Cleared existing categories');
+
+    // Insert new categories
+    const createdCategories = await Category.create(categories);
+    console.log(`Created ${createdCategories.length} categories`);
+
+    return createdCategories;
+  } catch (error) {
+    console.error('Error seeding categories:', error);
+    throw error;
+  }
+};
+
+const seedDatabase = async () => {
+  try {
+    await seedCategories();
+    console.log('Database seeded successfully');
+    process.exit(0);
+  } catch (error) {
+    console.error('Error seeding database:', error);
+    process.exit(1);
+  }
+};
+
 importData();
+seedDatabase();
