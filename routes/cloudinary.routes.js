@@ -10,7 +10,7 @@ const verifyAdmin = require('../middleware/authorization');
 const upload = multer();
 
 // Protect all routes with admin authentication
-router.use(verifyToken, verifyAdmin('admin'));
+router.use(verifyToken, verifyAdmin('admin', 'Super Admin'));
 
 //add image
 router.post('/add-img', upload.single('image'), cloudinaryController.saveImageCloudinary);
