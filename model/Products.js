@@ -62,6 +62,20 @@ const productsSchema = mongoose.Schema({
     slug: {
       type: String,
       required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+      enum: [
+        'main',
+        'gifting',
+        'chopping-boards',
+        'platters',
+        'trays',
+        'planters',
+        'bowls',
+        'cake-stands'
+      ]
     }
   },
   giftingCategory: {
@@ -77,6 +91,17 @@ const productsSchema = mongoose.Schema({
     slug: {
       type: String,
       required: false,
+    },
+    giftingType: {
+      type: String,
+      required: false,
+      enum: [
+        'wedding',
+        'corporate',
+        'festive',
+        'housewarming',
+        'anniversary'
+      ]
     }
   },
   price: {

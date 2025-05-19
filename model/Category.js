@@ -39,7 +39,6 @@ const CategorySchema = mongoose.Schema({
       'wedding',
       'corporate',
       'festive',
-      'seasonal',
       'housewarming',
       'anniversary'
     ]
