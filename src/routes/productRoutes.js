@@ -1,0 +1,1 @@
+router.post('/bulk', productController.bulkCreateProducts); 
