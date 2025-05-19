@@ -25,38 +25,15 @@ const cloudinaryRoutes = require("./routes/cloudinary.routes");
 // middleware
 app.use(cors({
   origin: [
+    'https://frontend-brown-sigma.vercel.app',
     'https://admin-sigma-ruby.vercel.app',
     'https://onewoodcraft3.vercel.app',
     'https://admin-one-nu.vercel.app',
-    'https://backend-8rnq.onrender.com',
-    'https://frontend-brown-sigma.vercel.app',
     'http://localhost:3000',
     'http://localhost:3001'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   credentials: true,
-  allowedHeaders: [
-    'Content-Type', 
-    'Authorization', 
-    'x-csrf-token', 
-    'Origin', 
-    'Accept', 
-    'X-Requested-With',
-    'Access-Control-Allow-Origin',
-    'Access-Control-Allow-Headers',
-    'Access-Control-Allow-Methods'
-  ],
-  exposedHeaders: [
-    'Content-Range', 
-    'X-Content-Range', 
-    'Authorization',
-    'Access-Control-Allow-Origin',
-    'Access-Control-Allow-Headers',
-    'Access-Control-Allow-Methods'
-  ],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-  maxAge: 86400 // Cache preflight requests for 24 hours
 }));
 
 // Add a specific OPTIONS handler for preflight requests
