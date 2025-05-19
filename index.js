@@ -25,8 +25,9 @@ const cloudinaryRoutes = require("./routes/cloudinary.routes");
 // middleware
 app.use(cors({
   origin: [
-    'https://admin-one-nu.vercel.app',
+    'https://admin-sigma-ruby.vercel.app',
     'https://onewoodcraft3.vercel.app',
+    'https://admin-one-nu.vercel.app',  // Add your current admin panel domain
     'http://localhost:3000',  // for local development
     'http://localhost:3001'   // for local development
   ],
