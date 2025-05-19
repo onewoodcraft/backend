@@ -28,6 +28,7 @@ app.use(cors({
     'https://admin-sigma-ruby.vercel.app',
     'https://onewoodcraft3.vercel.app',
     'https://admin-one-nu.vercel.app',
+    'https://backend-8rnq.onrender.com',
     'http://localhost:3000',
     'http://localhost:3001'
   ],
