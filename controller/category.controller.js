@@ -48,7 +48,7 @@ exports.getAllCategory = async (req,res,next) => {
     const result = await categoryServices.getAllCategoryServices();
     res.status(200).json({
       success:true,
-      result,
+      data: result,
     })
   } catch (error) {
     next(error)
