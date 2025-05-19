@@ -4,12 +4,13 @@ const router = express.Router();
 const uploader = require('../middleware/uploder');
 const { cloudinaryController } = require('../controller/cloudinary.controller');
 const multer = require('multer');
-const { verifyToken, verifyAdmin } = require('../middleware/auth');
+const verifyToken = require('../middleware/verifyToken');
+const verifyAdmin = require('../middleware/authorization');
 
 const upload = multer();
 
 // Protect all routes with admin authentication
-router.use(verifyToken, verifyAdmin);
+router.use(verifyToken, verifyAdmin('admin'));
 
 //add image
 router.post('/add-img', upload.single('image'), cloudinaryController.saveImageCloudinary);
