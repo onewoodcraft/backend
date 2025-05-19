@@ -27,9 +27,9 @@ app.use(cors({
   origin: [
     'https://admin-sigma-ruby.vercel.app',
     'https://onewoodcraft3.vercel.app',
-    'https://admin-one-nu.vercel.app',  // Add your current admin panel domain
-    'http://localhost:3000',  // for local development
-    'http://localhost:3001'   // for local development
+    'https://admin-one-nu.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:3001'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   credentials: true,
@@ -39,12 +39,27 @@ app.use(cors({
     'x-csrf-token', 
     'Origin', 
     'Accept', 
-    'X-Requested-With'
+    'X-Requested-With',
+    'Access-Control-Allow-Origin',
+    'Access-Control-Allow-Headers',
+    'Access-Control-Allow-Methods'
   ],
-  exposedHeaders: ['Content-Range', 'X-Content-Range', 'Authorization'],
+  exposedHeaders: [
+    'Content-Range', 
+    'X-Content-Range', 
+    'Authorization',
+    'Access-Control-Allow-Origin',
+    'Access-Control-Allow-Headers',
+    'Access-Control-Allow-Methods'
+  ],
   preflightContinue: false,
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 204,
+  maxAge: 86400 // Cache preflight requests for 24 hours
 }));
+
+// Add a specific OPTIONS handler for preflight requests
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
