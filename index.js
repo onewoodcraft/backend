@@ -22,18 +22,32 @@ const adminRoutes = require("./routes/admin.routes");
 // const uploadRouter = require('./routes/uploadFile.route');
 const cloudinaryRoutes = require("./routes/cloudinary.routes");
 
-// middleware
+// CORS Configuration
+const allowedOrigins = [
+  'https://frontend-brown-sigma.vercel.app',
+  'https://admin-sigma-ruby.vercel.app',
+  'https://onewoodcraft3.vercel.app',
+  'https://admin-one-nu.vercel.app',
+  'http://localhost:3000',
+  'http://localhost:3001'
+];
+
+// Configure CORS with proper options
 app.use(cors({
-  origin: [
-    'https://frontend-brown-sigma.vercel.app',
-    'https://admin-sigma-ruby.vercel.app',
-    'https://onewoodcraft3.vercel.app',
-    'https://admin-one-nu.vercel.app',
-    'http://localhost:3000',
-    'http://localhost:3001'
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, etc)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   credentials: true,
+  maxAge: 86400 // 24 hours
 }));
 
 // Add a specific OPTIONS handler for preflight requests
@@ -68,6 +82,12 @@ app.listen(PORT, () => console.log(`server running on port ${PORT}`));
 app.use(globalErrorHandler);
 //* handle not found
 app.use((req, res, next) => {
+  // Set CORS headers for 404 responses
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  
   res.status(404).json({
     success: false,
     message: 'Not Found',
