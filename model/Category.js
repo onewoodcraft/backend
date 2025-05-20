@@ -17,6 +17,21 @@ const CategorySchema = mongoose.Schema({
     required: true,
     unique: true,
   },
+  parent: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  children: [{
+    type: String,
+    trim: true,
+  }],
+  productType: {
+    type: String,
+    required: true,
+    enum: ['electronics', 'fashion', 'beauty', 'woodencraft', 'jewelry'],
+    default: 'electronics'
+  },
   type: {
     type: String,
     required: true,
@@ -42,11 +57,6 @@ const CategorySchema = mongoose.Schema({
       'housewarming',
       'anniversary'
     ]
-  },
-  parent: {
-    type: String,
-    required: false,
-    trim: true,
   },
   description: {
     type: String,
@@ -75,6 +85,9 @@ const CategorySchema = mongoose.Schema({
 
 // Pre-save middleware to generate slug
 CategorySchema.pre('save', function(next) {
+  if (this.parent && !this.slug) {
+    this.slug = this.parent.toLowerCase().replace(/[^a-z0-9]/g, '-');
+  }
   if (this.name && !this.slug) {
     this.slug = this.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
   }
